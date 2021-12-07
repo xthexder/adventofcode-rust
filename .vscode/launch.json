@@ -22,6 +22,25 @@
             },
             "args": [],
             "cwd": "${workspaceFolder}/day1"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Day2",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=day2",
+                    "--package=day2",
+                    "--manifest-path=day2/Cargo.toml"
+                ],
+                "filter": {
+                    "name": "day2",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/day2"
         }
     ]
 }
