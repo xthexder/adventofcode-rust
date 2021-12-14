@@ -98,6 +98,25 @@
             },
             "args": [],
             "cwd": "${workspaceFolder}/day5"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Day6",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=day6",
+                    "--package=day6",
+                    "--manifest-path=day6/Cargo.toml"
+                ],
+                "filter": {
+                    "name": "day6",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/day6"
         }
     ]
 }
