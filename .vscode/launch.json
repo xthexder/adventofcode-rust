@@ -60,6 +60,44 @@
             },
             "args": [],
             "cwd": "${workspaceFolder}/day3"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Day4",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=day4",
+                    "--package=day4",
+                    "--manifest-path=day4/Cargo.toml"
+                ],
+                "filter": {
+                    "name": "day4",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/day4"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Day5",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=day5",
+                    "--package=day5",
+                    "--manifest-path=day5/Cargo.toml"
+                ],
+                "filter": {
+                    "name": "day5",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/day5"
         }
     ]
 }
