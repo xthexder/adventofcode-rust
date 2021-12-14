@@ -53,7 +53,7 @@ fn part1(fish_in: &Vec<Lanternfish>) -> io::Result<()> {
 fn part2(fish_list: &Vec<Lanternfish>) -> io::Result<()> {
     let mut spawn_count: [usize; 9] = [0; 9];
     for fish in fish_list {
-        spawn_count[usize::from(fish.days_until_spawn)] += 1;
+        spawn_count[fish.days_until_spawn as usize] += 1;
     }
 
     for _ in 0..256 {
