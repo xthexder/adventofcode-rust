@@ -7,7 +7,6 @@ use std::cell::Cell;
 struct Node<'main> {
     name: &'main str,
     big: bool,
-    allow_twice: Cell<bool>,
     visit_count: Cell<u32>,
 
     neighbors: Vec<usize>,
@@ -30,54 +29,39 @@ impl <'main> Node<'main> {
         Node {
             name: name,
             big: name.chars().next().unwrap_or('a').is_ascii_uppercase(),
-            allow_twice: Cell::new(false),
             visit_count: Cell::new(0),
             neighbors: vec!(),
         }
     }
 
-    fn traverse<'a>(&self, nodes: &[Node<'main>], path_list: &'a mut Vec<Vec<&'main str>>, path: &[&'main str]) {
-        if self.big || self.visit_count.get() == 0 || (self.allow_twice.get() && self.visit_count.get() == 1) {
+    fn traverse<'a>(&self, nodes: &[Node<'main>], allow_twice: bool) -> u32 {
+        let mut paths = 0;
+        let this_twice = allow_twice && !self.big && self.visit_count.get() == 1 && self.name != "start" && self.name != "end";
+        if self.big || self.visit_count.get() == 0 || this_twice {
             self.visit_count.set(self.visit_count.get() + 1);
 
-            let mut new_path = path.to_vec();
-            new_path.push(self.name);
-
             if self.name == "end" {
-                path_list.push(new_path.clone());
+                paths += 1;
             }
 
             for node in self.neighbors.to_vec() {
-                nodes[node].traverse(nodes, path_list, &new_path);
+                paths += nodes[node].traverse(nodes, allow_twice && !this_twice);
             }
 
             self.visit_count.set(self.visit_count.get() - 1);
         }
+        paths
     }
 }
 
 fn part1<'main>(root: &Node<'main>, nodes: &[Node<'main>]) -> io::Result<()> {
-    let mut paths: Vec<Vec<&'main str>> = vec!();
-    root.traverse(nodes, &mut paths, &[]);
-    // for path in &paths {
-    //     println!("Path: {:?}", path);
-    // }
-    println!("Part 1: {}", paths.len());
+    let paths = root.traverse(nodes, false);
+    println!("Part 1: {}", paths);
     return Ok(())
 }
 fn part2<'main>(root: &Node<'main>, nodes: &[Node<'main>]) -> io::Result<()> {
-    let mut paths: Vec<Vec<&'main str>> = vec!();
-    for node in nodes {
-        if !node.big && node.name != "start" && node.name != "end" {
-            node.allow_twice.set(true);
-            root.traverse(nodes, &mut paths, &[]);
-            node.allow_twice.set(false);
-        }
-    }
-    // This is a really slow hack of a solution...
-    paths.sort();
-    paths.dedup();
-    println!("Part 2: {}", paths.len());
+    let paths = root.traverse(nodes, true);
+    println!("Part 2: {}", paths);
     return Ok(())
 }
 
