@@ -235,21 +235,21 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug Day13",
+            "name": "Debug day25",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=day13",
-                    "--package=day13",
-                    "--manifest-path=day13/Cargo.toml"
+                    "--bin=day25",
+                    "--package=day25",
+                    "--manifest-path=day25/Cargo.toml"
                 ],
                 "filter": {
-                    "name": "day13",
+                    "name": "day25",
                     "kind": "bin"
                 }
             },
             "args": [],
-            "cwd": "${workspaceFolder}/day13"
-        }
+            "cwd": "${workspaceFolder}/day25"
+        },
     ]
 }
