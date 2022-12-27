@@ -85,38 +85,6 @@ fn part1(input: &[Vec<i8>]) -> io::Result<()> {
     println!("Part 1: {} = {}", sum, snafu_to_str(&int_to_snafu(sum)));
     return Ok(());
 }
-// fn part2(dots_in: &[(i32, i32)], folds: &[(bool, i32)]) -> io::Result<()> {
-//     let mut dots = dots_in.to_vec();
-//     for fold in folds {
-//         do_fold(&mut dots, fold);
-//     }
-//     let mut min_opt = (None::<i32>, None::<i32>);
-//     let mut max_opt = (None::<i32>, None::<i32>);
-//     for (x, y) in &dots {
-//         min_opt.0 = Some(std::cmp::min(min_opt.0.unwrap_or(*x), *x));
-//         min_opt.1 = Some(std::cmp::min(min_opt.1.unwrap_or(*y), *y));
-//         max_opt.0 = Some(std::cmp::max(max_opt.0.unwrap_or(*x), *x));
-//         max_opt.1 = Some(std::cmp::max(max_opt.1.unwrap_or(*y), *y));
-//     }
-//     let min = (min_opt.0.unwrap(), min_opt.1.unwrap());
-//     let max = (max_opt.0.unwrap(), max_opt.1.unwrap());
-//     let mut grid = vec![vec![false; (max.0 - min.0 + 1) as usize]; (max.1 - min.1 + 1) as usize];
-//     for (x, y) in &dots {
-//         grid[*y as usize][*x as usize] = true;
-//     }
-//     println!("Part 2:");
-//     for row in &grid {
-//         for cell in row {
-//             if *cell {
-//                 print!("#");
-//             } else {
-//                 print!(" ");
-//             }
-//         }
-//         println!();
-//     }
-//     return Ok(())
-// }
 
 fn main() -> io::Result<()> {
     let mut file = File::open("input.txt")?;
@@ -147,5 +115,4 @@ fn main() -> io::Result<()> {
         .collect::<Vec<_>>();
 
     part1(&input)
-    // part2(&input)
 }
